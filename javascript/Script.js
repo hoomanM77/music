@@ -33,23 +33,21 @@ function _qAll(tag) {
 }
 ////////////////////////// timeDurationCalculator calculates the duration of audio ////////////////////////
 function timeDurationCalculator() {
-    setTimeout(function () {
-        let firstTwoDigits=Math.floor(audioTag.duration/60)
-        let secondDigits=Math.floor(audioTag.duration%60)
-        if(firstTwoDigits<10){
-            if(secondDigits<10){
-                musicDuration.innerHTML=`0${firstTwoDigits}:0${secondDigits}`
-            }else{
-                musicDuration.innerHTML=`0${firstTwoDigits}:${secondDigits}`
-            }
+    let firstTwoDigits=Math.floor(audioTag.duration/60)
+    let secondDigits=Math.floor(audioTag.duration%60)
+    if(firstTwoDigits<10){
+        if(secondDigits<10){
+            musicDuration.innerHTML=`0${firstTwoDigits}:0${secondDigits}`
         }else{
-            if(secondDigits<10){
-                musicDuration.innerHTML=`${firstTwoDigits}:0${secondDigits}`
-            }else{
-                musicDuration.innerHTML=`${firstTwoDigits}:${secondDigits}`
-            }
+            musicDuration.innerHTML=`0${firstTwoDigits}:${secondDigits}`
         }
-    },1000)
+    }else{
+        if(secondDigits<10){
+            musicDuration.innerHTML=`${firstTwoDigits}:0${secondDigits}`
+        }else{
+            musicDuration.innerHTML=`${firstTwoDigits}:${secondDigits}`
+        }
+    }
 }
 ///////////////////////////////// setInterValHandler calculate the current time of audio /////////////////////////////
 function setInterValHandler() {
@@ -101,10 +99,10 @@ function widthHandler() {
     },1000)
 }
 /////////////////////////////////// fire on play icon ///////////////////////////////
-playIcon.addEventListener('click',function () {
-    audioTag.play()
+playIcon.addEventListener('click', function () {
     musicCurrentTimeTag.style.display='block'
     musicDuration.style.display='block'
+    audioTag.play()
     setInterValHandler()
     widthHandler()
     timeDurationCalculator()
@@ -116,14 +114,14 @@ playIcon.addEventListener('click',function () {
         playIcon.classList.remove('bi-pause-circle-fill')
     }
 })
-changeState.addEventListener('click',function () {
+changeState.addEventListener('click', function () {
     if(!changeState.classList.contains('bi-pause-circle-fill')){
         timeDurationCalculator()
         audioTag.pause()
     }
 })
 /////////////////////////////////// fire on forward icon ///////////////////////////////
-forwardIcon.addEventListener('click',function () {
+forwardIcon.addEventListener('click', function () {
     musicCurrentTimeTag.style.display='block'
     musicDuration.style.display='block'
     forwardIcon.classList.add('forward_active')
@@ -141,17 +139,16 @@ forwardIcon.addEventListener('click',function () {
     showImageTag.setAttribute('src',imgSrcArray[indexOfPlayingNowSrc+1])
     musicDetailName.innerHTML=audioNamesArray[indexOfPlayingNowSrc+1]
     musicSinger.innerHTML=singerNameArray[indexOfPlayingNowSrc+1]
-    timeDurationCalculator()
-    setInterValHandler()
-    widthHandler()
-    audioTag.play()
-    setTimeout(function () {
+    audioTag.addEventListener('canplay',()=>{
+        timeDurationCalculator()
+        setInterValHandler()
+        widthHandler()
+        audioTag.play()
         forwardIcon.classList.remove('forward_active')
-    },1000)
-
+    })
 })
 /////////////////////////////////// fire on backward icon ///////////////////////////////
-backwardIcon.addEventListener('click',function () {
+backwardIcon.addEventListener('click', function () {
     musicCurrentTimeTag.style.display='block'
     musicDuration.style.display='block'
     backwardIcon.classList.add('backward_active')
@@ -169,14 +166,13 @@ backwardIcon.addEventListener('click',function () {
     showImageTag.setAttribute('src',imgSrcArray[indexOfPlayingNowSrc-1])
     musicDetailName.innerHTML=audioNamesArray[indexOfPlayingNowSrc-1]
     musicSinger.innerHTML=singerNameArray[indexOfPlayingNowSrc-1]
-    timeDurationCalculator()
-    setInterValHandler()
-    widthHandler()
-    audioTag.play()
-    setTimeout(function () {
+    audioTag.addEventListener('canplay',()=>{
+        timeDurationCalculator()
+        setInterValHandler()
+        widthHandler()
+        audioTag.play()
         backwardIcon.classList.remove('backward_active')
-    },1000)
-
+    })
 })
 /////////////////////////// fire on music progress div /////////////////////////////
 musicProgressTag.addEventListener('click',function (event) {
