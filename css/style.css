@@ -1,0 +1,74 @@
+*{
+    font-family: Cairo, sans-serif;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background:-moz-linear-gradient(178deg, rgba(0, 54, 255, 1) 1%, rgba(238, 130, 238, 1) 100%);
+    background:-webkit-linear-gradient(178deg, rgba(0, 54, 255, 1) 1%, rgba(238, 130, 238, 1) 100%);
+    background:-o-linear-gradient(178deg, rgba(0, 54, 255, 1) 1%, rgba(238, 130, 238, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EE82EE', endColorstr='#0036FF', GradientType=1 );
+    background:-ms-linear-gradient(178deg, rgba(0, 54, 255, 1) 1%, rgba(238, 130, 238, 1) 100%);
+    background:linear-gradient(178deg, rgba(0, 54, 255, 1) 1%, rgba(238, 130, 238, 1) 100%);
+}
+#music_card{
+    height: 500px;
+    max-width: 400px;
+    background: rgba(230,230,230);
+    border-radius: 50px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+.music-card-header{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: -40px;
+}
+.music-card-header img{
+    border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 2px 20px #333;
+}
+.music-progress{
+    width: 90%;
+    margin:1rem auto;
+    height: 4px;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+}
+.music-progress #progression{
+    height: 100%;
+    background: #222;
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+.music-progress .music-state{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    top: -28px;
+
+}
+#music_card .icons{
+    display: flex;
+    justify-content: center;
+}
+#music_card .icons i{
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.music-current-time,.music-duration{
+    display: none;
+}
+.play_icon{
+    margin: 0 2rem;
+}
